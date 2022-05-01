@@ -43,7 +43,7 @@ function showError(error) {
   // insert error div before the heading of loan calculator
   card.insertBefore(errorDiv, heading);
   // clear error after 2s
-  setTimeout(clearError, 3000);
+  setTimeout(clearError, 2500);
 }
 function clearError() {
   document.querySelector('.alert').remove();
