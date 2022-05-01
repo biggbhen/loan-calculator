@@ -8,7 +8,7 @@ function calculateResults(e) {
   const UIamount = document.getElementById('amount');
   const UIinterest = document.getElementById('interest');
   const UIyears = document.getElementById('years');
-  const UImonthlyPayment = document.getElementById('month-payment');
+  const UImonthlyPayment = document.getElementById('monthly-payment');
   const UItotalPayment = document.getElementById('total-payment');
   const UItotalInterest = document.getElementById('total-interest');
 
@@ -27,8 +27,24 @@ function calculateResults(e) {
       2
     );
   } else {
-    console.log('error');
+    showError('please check your numbers');
   }
 
   e.preventDefault();
+}
+
+function showError(error) {
+  const card = document.querySelector('.card');
+  const heading = document.querySelector('.heading');
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'alert alert-danger';
+  errorDiv.appendChild(document.createTextNode(error));
+
+  // insert error div before the heading of loan calculator
+  card.insertBefore(errorDiv, heading);
+  // clear error after 2s
+  setTimeout(clearError, 3000);
+}
+function clearError() {
+  document.querySelector('.alert').remove();
 }
