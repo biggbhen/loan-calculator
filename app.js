@@ -1,10 +1,13 @@
 // add eventListener to the submit button
-document
-  .getElementById('loan-form')
-  .addEventListener('submit', calculateResults);
+document.getElementById('loan-form').addEventListener('submit', function (e) {
+  // document.getElementById('results').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+  setTimeout(calculateResults, 2000);
+  e.preventDefault();
+});
 
 // calculate Results
-function calculateResults(e) {
+function calculateResults() {
   const UIamount = document.getElementById('amount');
   const UIinterest = document.getElementById('interest');
   const UIyears = document.getElementById('years');
@@ -26,11 +29,11 @@ function calculateResults(e) {
     UItotalInterest.value = (monthly * calculatedPayments - principal).toFixed(
       2
     );
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('loading').style.display = 'none';
   } else {
     showError('please check your numbers');
   }
-
-  e.preventDefault();
 }
 
 function showError(error) {
@@ -44,6 +47,8 @@ function showError(error) {
   card.insertBefore(errorDiv, heading);
   // clear error after 2s
   setTimeout(clearError, 2500);
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('loading').style.display = 'none';
 }
 function clearError() {
   document.querySelector('.alert').remove();
